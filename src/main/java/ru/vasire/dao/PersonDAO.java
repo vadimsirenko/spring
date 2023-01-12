@@ -1,5 +1,6 @@
 package ru.vasire.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.vasire.model.Person;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class PeopleDAO {
+public class PersonDAO {
     List<Person> people;
     int PERSON_COUNT;
 
@@ -19,7 +20,7 @@ public class PeopleDAO {
         people.add(new Person(++PERSON_COUNT, "Дмитрий"));
     }
 
-    public Person getPerson(int id){
+    public Person show(int id){
         return people.stream().filter(p->p.getId()==id).findAny().orElse(null);
     }
 
@@ -27,4 +28,15 @@ public class PeopleDAO {
         return people;
     }
 
+    public void create(Person person){
+        people.add(new Person(++PERSON_COUNT, person.getName()));
+    }
+    public void update(int id, Person person){
+        Person personToUpdate = show(id);
+        personToUpdate.setName(person.getName());
+    }
+
+    public void delete(int id){
+        people.removeIf(p -> p.getId() == id);
+    }
 }
