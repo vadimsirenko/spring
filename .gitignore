@@ -3,6 +3,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Secret properies ###
+!**/src/main/recources/database.properties
+
 ### IntelliJ IDEA ###
 /.idea/
 #.idea/modules.xml
