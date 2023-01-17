@@ -8,6 +8,7 @@ import ru.vasire.model.Person;
 
 import java.sql.Types;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PersonDAO {
@@ -23,6 +24,13 @@ public class PersonDAO {
                         new Object[]{id},
                         new int[]{Types.INTEGER},
                         new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
+    }
+
+    public Optional<Person> show(int id, String email){
+        return jdbcTemplate.query("SELECT id, name, age, email FROM person WHERE id <>? AND email = ?",
+                new Object[]{id, email},
+                new int[]{Types.INTEGER, Types.VARCHAR},
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 
     public List<Person> getAll(){
