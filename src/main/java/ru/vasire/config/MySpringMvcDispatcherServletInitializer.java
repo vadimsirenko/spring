@@ -1,14 +1,16 @@
 package ru.vasire.config;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import java.util.logging.Filter;
+//import jakarta.servlet.ServletContext;
+//import jakarta.servlet.ServletException;
 
 public class MySpringMvcDispatcherServletInitializer extends
         AbstractAnnotationConfigDispatcherServletInitializer {
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[0];
@@ -34,4 +36,5 @@ public class MySpringMvcDispatcherServletInitializer extends
         servletContext.addFilter("hiddenHttpMethodFilter",
                 new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null, true, "/*");
     }
+
 }

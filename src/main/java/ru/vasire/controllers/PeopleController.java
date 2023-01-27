@@ -6,10 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.vasire.dao.PersonDAO;
-import ru.vasire.model.Person;
+import ru.vasire.models.Person;
 import ru.vasire.util.PersonValidator;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @Controller

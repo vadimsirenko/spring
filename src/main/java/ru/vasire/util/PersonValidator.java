@@ -1,11 +1,10 @@
 package ru.vasire.util;
 
 import org.springframework.stereotype.Component;
-import org.springframework.validation.AbstractBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.vasire.dao.PersonDAO;
-import ru.vasire.model.Person;
+import ru.vasire.models.Person;
 
 @Component
 public class PersonValidator implements Validator {

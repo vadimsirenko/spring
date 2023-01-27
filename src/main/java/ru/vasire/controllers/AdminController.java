@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vasire.dao.PersonDAO;
-import ru.vasire.model.Person;
+import ru.vasire.models.Person;
 
 @Controller
 @RequestMapping("/admin")

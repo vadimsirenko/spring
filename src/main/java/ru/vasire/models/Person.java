@@ -1,20 +1,30 @@
-package ru.vasire.model;
+package ru.vasire.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
+@Entity
+@Table(name = "person")
 public class Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     int id;
     @NotEmpty(message = "Имя не может быть пустым")
     @Size(min=2, max=30, message = "Имя должно содержать от 2 до 30 символов")
+    @Column(name = "name")
     String name;
     @Min(value = 0,message = "Возраст должен быть 0 или больше")
+    @Column(name = "age")
     int age;
     @NotEmpty(message = "Адрес электронной почты должен быть заполнен")
     @Email(message = "Не корректный адрес электронной почты")
+    @Column(name = "email")
     String email;
 
     public int getAge() {
