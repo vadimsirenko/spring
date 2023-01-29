@@ -49,7 +49,11 @@ public class Person {
         this.email = email;
         this.id = id;
     }
-
+    public Person(String name, int age, String email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
     public Person() {
     }
 

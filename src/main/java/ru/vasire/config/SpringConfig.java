@@ -107,7 +107,13 @@ public class SpringConfig implements WebMvcConfigurer {
     public PlatformTransactionManager hibernateTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory().getObject());
-
         return transactionManager;
     }
+
+    @Bean
+    public SessionManager sessionManager() {
+        SessionManager sessionManager = new SessionManager(sessionFactory().getObject());
+        return sessionManager;
+    }
+
 }
