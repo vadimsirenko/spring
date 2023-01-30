@@ -8,6 +8,8 @@
 <p th:text="${'Имя: '+ person.getName()}">VALUE</p>
 <p th:text="${'Возраст: ' + person.getAge()}">VALUE</p>
 <p th:text="${'e-mail: ' + person.getEmail()}">VALUE</p>
+<p th:text="${'Настроение: ' + person.getMoodName()}">VALUE</p>
+<p th:text="${'Дата рождения: ' + person.getDateOfBirth()}">VALUE</p>
 <p th:text="${'id: ' + person.getId()}">VALUE</p>
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Изменить</a>
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">

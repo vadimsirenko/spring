@@ -6,6 +6,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "person")
@@ -26,6 +29,46 @@ public class Person {
     @Email(message = "Не корректный адрес электронной почты")
     @Column(name = "email")
     String email;
+
+    @Column(name = "date_of_birth")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat( pattern = "dd.MM.yyyy")
+    private Date dateOfBirth;
+
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @Enumerated(EnumType.ORDINAL)
+    private Mood mood;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Mood getMood() {
+        return mood;
+    }
+
+    public String getMoodName() {
+        if(mood==null)
+            return "";
+        return mood.getDisplayValue();
+    }
+    public void setMood(Mood mood) {
+        this.mood = mood;
+    }
 
     public int getAge() {
         return age;

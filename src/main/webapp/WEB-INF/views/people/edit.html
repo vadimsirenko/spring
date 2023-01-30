@@ -18,6 +18,16 @@
     <input type="text" th:field="*{email}" id="email"/>
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
     <br />
+    <label for="mood" >Настроение</label>
+    <select name="color" id="mood" th:field="*{mood}">
+        <option th:each="moodOpt : ${T(ru.vasire.models.Mood).values()}"
+                th:value="${moodOpt}" th:text="${moodOpt.getDisplayValue()}"></option>
+    </select>
+    <br />
+    <label for="date_of_birth" >Дата рождения (дд.мм.гггг)</label>
+    <input type="text" th:field="*{dateOfBirth}" id="date_of_birth"/>
+    <div style="color:red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">Date Of birth Error</div>
+    <br />
     <input type="submit" name="Изменить">
 </form>
 </body>

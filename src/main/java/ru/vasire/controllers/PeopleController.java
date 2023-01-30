@@ -1,6 +1,7 @@
 package ru.vasire.controllers;
 
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,7 +10,6 @@ import ru.vasire.models.Person;
 import ru.vasire.services.PeopleService;
 import ru.vasire.util.PersonValidator;
 
-import jakarta.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -55,8 +55,7 @@ public class PeopleController {
         personValidator.validate(person, bindingResult);
         if(bindingResult.hasErrors())
             return "people/edit";
-        person.setId(id);
-        peopleService.save(person);
+        peopleService.update(id, person);
         return "redirect:/people";
     }
     @GetMapping("/{id}/edit")
