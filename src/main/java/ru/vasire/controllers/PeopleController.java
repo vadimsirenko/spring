@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.vasire.dao.PersonDAO;
 import ru.vasire.models.Person;
+import ru.vasire.services.PeopleService;
 import ru.vasire.util.PersonValidator;
 
 import jakarta.validation.Valid;
@@ -16,24 +16,24 @@ import java.util.List;
 @RequestMapping("/people")
 public class PeopleController {
 
-    private final PersonDAO personDAO;
+    private final PeopleService peopleService;
     private final PersonValidator personValidator;
 
-    public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
-        this.personDAO = personDAO;
+    public PeopleController(PeopleService peopleService, PersonValidator personValidator) {
+        this.peopleService = peopleService;
         this.personValidator = personValidator;
     }
 
     @GetMapping()
     public String index(Model model) {
-        List<Person> people = personDAO.getAll();
+        List<Person> people = peopleService.findAll();
         model.addAttribute("people", people);
         return "people/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        Person person = personDAO.show(id);
+        Person person = peopleService.findOne(id);
         model.addAttribute("person", person);
         return "people/show";
     }
@@ -44,7 +44,7 @@ public class PeopleController {
 
         if(bindingResult.hasErrors())
             return "people/new";
-        personDAO.create(person);
+        peopleService.save(person);
         return "redirect:/people";
     }
 
@@ -55,12 +55,13 @@ public class PeopleController {
         personValidator.validate(person, bindingResult);
         if(bindingResult.hasErrors())
             return "people/edit";
-        personDAO.update(id, person);
+        person.setId(id);
+        peopleService.save(person);
         return "redirect:/people";
     }
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", personDAO.show(id));
+        model.addAttribute("person", peopleService.findOne(id));
         return "people/edit";
     }
 
@@ -74,7 +75,7 @@ public class PeopleController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        personDAO.delete(id);
+        peopleService.delete(id);
         return "redirect:/people";
     }
 }
